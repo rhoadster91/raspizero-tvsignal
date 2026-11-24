@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tvsignal"
+version = "0.1.0"
+description = "Switch a smart plug on and off to follow a Philips Android TV's power state"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ha-philipsjs==3.3.0",  # version verified against the TV
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[project.scripts]
+tvsignal = "tvsignal.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

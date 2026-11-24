@@ -1,0 +1,33 @@
+[Unit]
+Description=Follow the TV's power state with the speakers' smart plug
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=tvsignal
+Group=tvsignal
+ExecStart=/opt/tvsignal/venv/bin/tvsignal run --config /etc/tvsignal/config.toml
+Restart=always
+RestartSec=5
+# 2 = config error, 3 = re-pair needed: restarting won't help.
+RestartPreventExitStatus=2 3
+StateDirectory=tvsignal
+StateDirectoryMode=0700
+Environment=PYTHONUNBUFFERED=1
+# hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryMax=128M
+
+[Install]
+WantedBy=multi-user.target

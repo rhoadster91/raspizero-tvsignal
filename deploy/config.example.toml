@@ -1,0 +1,19 @@
+# tvsignal configuration. Installed to /etc/tvsignal/config.toml (root:tvsignal, 0640)
+# only if that file doesn't exist yet. Edit it there, then: sudo systemctl restart tvsignal
+# Every key can be overridden on the command line (see `tvsignal run --help`).
+# The addresses below are documentation placeholders (RFC 5737): replace them.
+
+[tv]
+host = "192.0.2.10"                                # the TV's (reserved) IP
+credentials = "/var/lib/tvsignal/credentials.json" # written by `tvsignal pair`
+
+[sink]
+type = "log"            # "log" = only log what would happen (trial week); "shelly" = switch the plug
+host = "192.0.2.20"     # the plug's (reserved) IP; shelly only
+# password = ""         # only if a password is set on the plug (or set TVSIGNAL_SINK_PASSWORD)
+
+[timing]
+interval = 2            # s between polls
+on_delay = 0            # s the TV must look active before plug ON (0 = first active poll)
+off_delay = 10          # s the TV must look inactive, continuously, before plug OFF
+heartbeat = 600         # s between "unchanged" log lines

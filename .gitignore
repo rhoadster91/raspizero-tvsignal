@@ -1,0 +1,23 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Local, machine-specific or secret files. Never commit these.
+credentials*.json
+/config.toml
+*.local.toml
+scripts/deploy.env
+.env
+*.log
+
+# Editors / OS / tools
+.DS_Store
+.idea/
+.vscode/
+.claude/settings.local.json
